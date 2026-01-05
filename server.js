@@ -10,7 +10,7 @@ app.use(express.static('public')); // Serves your frontend files
 const db = mysql.createConnection({
     host: 'localhost',
     user: 'root',
-    password: 'Adwaith@12042005', // Add your MySQL password here
+    password: '123', // Add your MySQL password here
     database: 'campus_db'
 });
 
@@ -100,3 +100,4 @@ app.put('/api/events/:id', (req, res) => {
 });
 
 app.listen(3000, '127.0.0.1', () => console.log("Server running at http://127.0.0.1:3000"));
+
