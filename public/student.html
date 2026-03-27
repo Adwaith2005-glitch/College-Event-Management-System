@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Student Portal - Campus Events</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body onload="loadStudentEvents()">
+    <header class="navbar">
+        <h2>Campus Events</h2>
+        <button class="btn-logout" onclick="location.href='index.html'">Logout</button>
+    </header>
+
+    <div class="container">
+        <div class="welcome-section">
+            <h1>Available Events</h1>
+            <p>Register for upcoming workshops, seminars, and fests.</p>
+        </div>
+
+        <div id="event-grid" class="event-grid">
+            </div>
+    </div>
+
+    <div id="reg-modal-overlay" class="overlay">
+        <div class="modal registration-modal">
+    <h3>Event Registration</h3>
+    <p id="targetEventName" style="color: #1a73e8; font-weight: bold;"></p>
+    <hr>
+    
+    <input type="hidden" id="regEventId">
+    
+    <label>Your Full Name</label>
+    <input type="text" id="studentName" placeholder="Enter your full name" required>
+
+    <div class="row" style="display: flex; gap: 10px;">
+        <div style="flex: 1;">
+            <label>Department</label>
+            <select id="studentDept" style="width: 100%; padding: 8px; margin-bottom: 10px;">
+                <option value="CSE">CSE</option>
+                <option value="ECE">ECE</option>
+                <option value="MECH">Mechanical</option>
+                <option value="CIVIL">Civil</option>
+                <option value="IT">IT</option>
+            </select>
+        </div>
+        <div style="flex: 1;">
+            <label>Semester</label>
+            <select id="studentSem" style="width: 100%; padding: 8px; margin-bottom: 10px;">
+                <option value="1">Sem 1</option>
+                <option value="2">Sem 2</option>
+                <option value="3">Sem 3</option>
+                <option value="4">Sem 4</option>
+                <option value="5">Sem 5</option>
+                <option value="6">Sem 6</option>
+                <option value="7">Sem 7</option>
+                <option value="8">Sem 8</option>
+            </select>
+        </div>
+    </div>
+
+    <label>Student Email</label>
+    <input type="email" id="studentEmail" placeholder="address@gmail.com" required>
+
+    <label>Mobile Number</label>
+    <input type="tel" id="studentMobile" placeholder="10-digit mobile number" required>
+    <div id="paidInfo" style="display:none;" class="alert-box">
+        <p>⚠️ This is a paid event. Amount due: <span id="eventPrice"></span></p>
+    </div>
+
+    <div class="modal-footer">
+        <button class="btn-primary" onclick="submitRegistration()">Confirm & Get Token</button>
+        <button class="btn-close" onclick="closeRegModal()">Cancel</button>
+    </div>
+</div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Dashboard - Event Management</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body onload="loadAdminEvents()">
+    <header class="admin-nav">
+        <h2>Admin Dashboard</h2>
+        <button class="btn-logout" onclick="location.href='index.html'">Logout</button>
+    </header>
+
+ <main class="content">
+    <section class="report-section" style="margin-bottom: 30px; padding: 20px; background: white; border-radius: 12px; box-shadow: var(--shadow);">
+        <h2 style="color: var(--primary); margin-top: 0;">📊 Event Performance Report</h2>
+        <div id="summary-report-container"></div>
+    </section>
+
+    <div class="section-divider" style="margin-top: 30px; padding-top: 10px;">
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+            <h2 style="color: #1e293b; display: flex; align-items: center; gap: 10px; margin: 0;">
+                <span style="background: #1a73e8; width: 12px; height: 12px; border-radius: 50%;"></span>
+                Active Events
+            </h2>
+            <button class="btn-add" onclick="openCreateModal()">+ Create New Event</button>
+        </div>
+        <p style="color: #94a3b8; font-size: 0.9rem; margin-top: 5px; margin-bottom: 15px;">Currently ongoing or upcoming registration periods.</p>
+    </div>
+
+    <div class="table-wrapper">
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th><th>Event Name</th><th>Venue</th><th>Date</th><th>Cost</th><th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="admin-event-list"></tbody>
+        </table>
+    </div>
+
+    <div class="section-divider" style="margin-top: 50px; border-top: 2px solid #e2e8f0; padding-top: 20px;">
+        <h2 style="color: #64748b; display: flex; align-items: center; gap: 10px; margin: 0;">
+            <span style="background: #cbd5e1; width: 12px; height: 12px; border-radius: 50%;"></span>
+            Closed / Past Events
+        </h2>
+        <p style="color: #94a3b8; font-size: 0.9rem; margin-top: 5px; margin-bottom: 15px;">Registration deadlines for these events have passed.</p>
+    </div>
+
+    <div class="table-wrapper" style="opacity: 0.75; filter: grayscale(20%);">
+        <table style="border: 1px solid #e2e8f0;">
+            <thead style="background: #f8fafc;">
+                <tr>
+                    <th>ID</th><th>Event Name</th><th>Venue</th><th>Date</th><th>Cost</th><th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="closed-event-list"></tbody>
+        </table>
+    </div>
+</main>
+
+    <div id="event-modal-overlay" class="overlay">
+        <div class="modal form-modal">
+            <h3 id="modalTitle">Event Details</h3>
+            <hr>
+            <input type="hidden" id="editEventId">
+            <label>Event Name</label>
+            <input type="text" id="evName">
+            
+            <label>Venue</label>
+            <input type="text" id="evVenue">
+
+            <div class="row">
+                <div class="col"><label>Date</label><input type="date" id="evDate"></div>
+                <div class="col"><label>Time</label><input type="time" id="evTime"></div>
+            </div>
+
+            <label>Total Slots</label>
+            <input type="number" id="evSlots">
+
+            <label>Type</label>
+            <select id="evType" onchange="document.getElementById('priceBox').style.display = (this.value=='1'?'block':'none')">
+                <option value="0">Free Event</option>
+                <option value="1">Paid Event</option>
+            </select>
+
+            <div id="priceBox" style="display:none;">
+                <label>Amount (₹)</label>
+                <input type="number" id="evAmount" value="0">
+            </div>
+            <label>Event Poster</label>
+<input type="file" id="evPoster" accept="image/*">
+
+            <div class="modal-footer">
+                <button class="btn-primary" onclick="saveEvent()">Save Event</button>
+                <button class="btn-close" onclick="closeEventModal()">Cancel</button>
+            </div>
+        </div>
+    </div>
+   <div id="student-list-overlay" class="overlay" style="display:none;">
+    <div class="modal student-modal" style="max-width: 800px; width: 90%;">
+        <h3>Participants List</h3>
+        <hr>
+        
+        <div class="filter-bar" style="display: flex; align-items: center; gap: 10px; margin-bottom: 15px; background: #f1f5f9; padding: 12px; border-radius: 8px;">
+    <input type="text" id="filterDept" placeholder="Dept (e.g. CS)" onkeyup="filterStudents()" style="flex: 2; padding: 10px; border-radius: 6px; border: 1px solid #cbd5e1;">
+    <input type="number" id="filterSem" placeholder="Sem" onkeyup="filterStudents()" style="width: 70px; padding: 10px; border-radius: 6px; border: 1px solid #cbd5e1;">
+    
+    <div id="filterCount" style="background: #1a73e8; color: white; padding: 8px 12px; border-radius: 20px; font-size: 14px; font-weight: bold; white-space: nowrap;">
+        Showing: 0
+    </div>
+
+    <button onclick="resetFilters()" style="padding: 10px; background: #64748b; color: white; border: none; border-radius: 6px; cursor: pointer;">Reset</button>
+</div>
+
+        <div id="student-table-container" style="max-height: 400px; overflow-y: auto;">
+            </div>
+        
+        <div class="modal-footer" style="margin-top: 20px;">
+            <button class="btn-close" onclick="closeStudentModal()">Close</button>
+        </div>
+    </div>
+</div>
+
+    <script src="script.js"></script>
+</body>
+</html>

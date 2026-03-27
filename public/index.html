@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <title>College Event Management - Login</title>
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body class="login-bg">
+    <div class="login-container">
+        <div class="login-card">
+            <div style="font-size: 3rem; margin-bottom: 10px;">🎓</div>
+            <h1>Campus Events</h1>
+            <p>Select your portal to continue</p>
+            
+            <div class="btn-group">
+                <button class="btn-student" onclick="location.href='student.html'">
+                    Student Portal
+                </button>
+                <button class="btn-admin" onclick="openAdminPopup()">
+                    Admin Portal
+                </button>
+            </div>
+            
+            <footer style="margin-top: 2rem; font-size: 0.8rem; color: #94a3b8;">
+                Developed for University Event Management
+            </footer>
+        </div>
+    </div>
+
+
+
+    <div id="modal-overlay" class="overlay">
+
+        <div class="modal auth-popup">
+
+            <h3>Admin Authentication</h3>
+
+            <p>Please enter your credentials to access the dashboard.</p>
+
+            <input type="password" id="adminPassInput" placeholder="Enter Admin Password">
+
+            <div class="modal-footer">
+
+                <button class="btn-primary" onclick="verifyAdmin()">Login</button>
+
+                <button class="btn-close" onclick="closePopup()">Cancel</button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <script>
+
+        function openAdminPopup() {
+
+            document.getElementById('modal-overlay').style.display = 'block';
+            setTimeout(() => document.getElementById('adminPassInput').focus(), 100);
+
+        }
+
+
+
+        function closePopup() {
+
+            document.getElementById('modal-overlay').style.display = 'none';
+
+        }
+
+
+
+        function verifyAdmin() {
+
+            const pass = document.getElementById('adminPassInput').value;
+
+            if(pass === 'admin123') { // Replace with your desired password
+
+                window.location.href = 'admin.html';
+
+            } else {
+
+                alert('Invalid Password!');
+
+            }
+
+        }
+
+        // Add this inside your <script>
+document.getElementById('adminPassInput').addEventListener('keypress', function (e) {
+    if (e.key === 'Enter') {
+        verifyAdmin();
+    }
+});
+
+    </script>
+
+</body>
+
+</html>
